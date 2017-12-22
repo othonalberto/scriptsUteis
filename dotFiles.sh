@@ -1,11 +1,31 @@
 # @othonalberto
+MSG_PADRAO="Atualizacao"
 
-# copia .vimrc para repositorio do github
 cp ~/.vimrc ~/repositorios/github/dotfiles/vimrc
-
-# copia .gitconfig para repositorio do github
 cp ~/.gitconfig ~/repositorios/github/dotfiles/gitconfig
+# cp ~/.config/fish/config.fish ~/repositorios/github/dotfiles
+cp ~/.bash_profile ~/repositorios/github/dotfiles/bash_profile
 
-#copia config.fish para o repositorio do github
-cp ~/.config/fish/config.fish ~/repositorios/github/dotfiles
+cd ~/repositorios/github/dotfiles
+
+git add .
+
+echo "Mensagem do commit: "
+read MSG
+
+if [ "$MSG" != '' ]; then
+    git commit -m "$MSG"
+else
+    git commit -m "$MSG_PADRAO"
+fi
+
+echo "Quase terminando..."
+echo "Desejar dar push? (0 - negativo; 1 - positivo): "
+read OPC
+
+if [ "$OPC" -eq 1 ]; then
+    git push
+fi
+
+echo "Pronto!"
 
